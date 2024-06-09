@@ -63,13 +63,13 @@ public class PersonagemController {
         return exists? ResponseEntity.ok(repository.save(Personagem)): ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<String> deleteCharacter(@RequestBody Personagem Personagem) {
-        Boolean exists = repository.existsById(Personagem.getPersonagemId());
+    public ResponseEntity<String> deleteCharacter(@PathVariable Long id) {
+        Boolean exists = repository.existsById(id);
 
         if (exists) {
-            repository.delete(Personagem);
+            repository.deleteById(id);
             return ResponseEntity.ok("Personagem removido");
         } else {
             return ResponseEntity.notFound().build();

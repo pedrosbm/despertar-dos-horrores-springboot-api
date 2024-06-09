@@ -62,13 +62,13 @@ public class ItemController {
         return exists? ResponseEntity.ok(repository.save(Item)): ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<String> deleteItem(@RequestBody Item Item) {
-        Boolean exists = repository.existsById(Item.getItemId());
+    public ResponseEntity<String> deleteItem(@PathVariable Long id) {
+        Boolean exists = repository.existsById(id);
 
         if (exists) {
-            repository.delete(Item);
+            repository.deleteById(id);
             return ResponseEntity.ok("Item removido");
         } else {
             return ResponseEntity.notFound().build();
