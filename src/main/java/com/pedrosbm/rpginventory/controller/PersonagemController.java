@@ -31,8 +31,8 @@ public class PersonagemController {
      
     @GetMapping("/User/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public ResponseEntity<Page<Personagem>> getCharactersByUser(@RequestParam Long userId, @PageableDefault(size = 5) Pageable pageable) {
-        Page<Personagem> lista = repository.findByUsuarioUserId(userId, pageable);
+    public ResponseEntity<Page<Personagem>> getCharactersByUser(@RequestParam Long id, @PageableDefault(size = 5) Pageable pageable) {
+        Page<Personagem> lista = repository.findByUsuarioUserId(id, pageable);
         
         return ResponseEntity.ok(lista);
     }
@@ -40,9 +40,9 @@ public class PersonagemController {
 
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public ResponseEntity<Personagem> getCharacter(@PathVariable Long personagemId) {
+    public ResponseEntity<Personagem> getCharacter(@PathVariable Long id) {
         try {
-            Personagem personagem = repository.findById(personagemId).get();
+            Personagem personagem = repository.findById(id).get();
             
             return ResponseEntity.ok(personagem);
         } catch (NoSuchElementException e) {

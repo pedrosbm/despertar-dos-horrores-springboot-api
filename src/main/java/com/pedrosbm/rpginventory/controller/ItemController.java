@@ -30,8 +30,8 @@ public class ItemController {
      
     @GetMapping("/Personagem/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public ResponseEntity<Page<Item>> getItemsByCharacter(@RequestParam Long personagemId, @PageableDefault(size = 20) Pageable pageable) {
-        Page<Item> lista = repository.findByPersonagemPersonagemId(personagemId, pageable);
+    public ResponseEntity<Page<Item>> getItemsByCharacter(@RequestParam Long id, @PageableDefault(size = 20) Pageable pageable) {
+        Page<Item> lista = repository.findByPersonagemPersonagemId(id, pageable);
         
         return ResponseEntity.ok(lista);
     }
@@ -39,9 +39,9 @@ public class ItemController {
 
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public ResponseEntity<Item> getItem(@PathVariable Long ItemId) {
+    public ResponseEntity<Item> getItem(@PathVariable Long id) {
         try {
-            Item Item = repository.findById(ItemId).get();
+            Item Item = repository.findById(id).get();
             
             return ResponseEntity.ok(Item);
         } catch (NoSuchElementException e) {

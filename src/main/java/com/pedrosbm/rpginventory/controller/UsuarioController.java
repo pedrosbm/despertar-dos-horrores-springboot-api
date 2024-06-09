@@ -28,9 +28,9 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public ResponseEntity<Usuario> getUser(@PathVariable Long userId) {
+    public ResponseEntity<Usuario> getUser(@PathVariable Long id) {
         try {
-            Usuario user = repository.findById(userId).get();
+            Usuario user = repository.findById(id).get();
             
             return ResponseEntity.ok(user);
         } catch (NoSuchElementException e) {
