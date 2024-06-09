@@ -15,7 +15,7 @@ public class Personagem {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long personagemId;
 
-    private String PersonagemNome;
+    private String personagemNome;
 
     // private String tipoAura;
 
