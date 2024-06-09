@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RequestParam;
     
 @RestController
 @RequestMapping("/Personagem")
@@ -31,7 +30,7 @@ public class PersonagemController {
      
     @GetMapping("/User/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public ResponseEntity<Page<Personagem>> getCharactersByUser(@RequestParam Long id, @PageableDefault(size = 5) Pageable pageable) {
+    public ResponseEntity<Page<Personagem>> getCharactersByUser(@PathVariable Long id, @PageableDefault(size = 5) Pageable pageable) {
         Page<Personagem> lista = repository.findByUsuarioUserId(id, pageable);
         
         return ResponseEntity.ok(lista);
