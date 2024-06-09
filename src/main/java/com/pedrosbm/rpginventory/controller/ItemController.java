@@ -8,11 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.pedrosbm.rpginventory.models.Personagem;
-import com.pedrosbm.rpginventory.repository.PersonagemRepository;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,19 +15,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RequestParam;
-    
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pedrosbm.rpginventory.models.Item;
+import com.pedrosbm.rpginventory.repository.ItemRepository;
+
 @RestController
-@RequestMapping("/Personagem")
-public class PersonagemController {
+@RequestMapping("Item")
+public class ItemController {
     @Autowired
-    private PersonagemRepository repository;
+    private ItemRepository repository;
      
-    @GetMapping("/User/{id}")
+    @GetMapping("/Personagem/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public ResponseEntity<Page<Personagem>> getCharactersByUser(@RequestParam Long userId, @PageableDefault(size = 5) Pageable pageable) {
-        Page<Personagem> lista = repository.findByUsuarioUserId(userId, pageable);
+    public ResponseEntity<Page<Item>> getItemsByCharacter(@RequestParam Long personagemId, @PageableDefault(size = 20) Pageable pageable) {
+        Page<Item> lista = repository.findByPersonagemPersonagemId(personagemId, pageable);
         
         return ResponseEntity.ok(lista);
     }
@@ -40,11 +39,11 @@ public class PersonagemController {
 
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public ResponseEntity<Personagem> getCharacter(@PathVariable Long personagemId) {
+    public ResponseEntity<Item> getItem(@PathVariable Long ItemId) {
         try {
-            Personagem personagem = repository.findById(personagemId).get();
+            Item Item = repository.findById(ItemId).get();
             
-            return ResponseEntity.ok(personagem);
+            return ResponseEntity.ok(Item);
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }
@@ -52,28 +51,28 @@ public class PersonagemController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    public ResponseEntity<Personagem> newCharacter(@RequestBody Personagem Personagem) {
-        return ResponseEntity.ok(repository.save(Personagem));
+    public ResponseEntity<Item> newItem(@RequestBody Item Item) {
+        return ResponseEntity.ok(repository.save(Item));
     }
     
     @PutMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ResponseEntity<Personagem> updateCharacter(@RequestBody Personagem Personagem) {
-        Boolean exists = repository.existsById(Personagem.getPersonagemId());   
+    public ResponseEntity<Item> updateItem(@RequestBody Item Item) {
+        Boolean exists = repository.existsById(Item.getItemId());   
 
-        return exists? ResponseEntity.ok(repository.save(Personagem)): ResponseEntity.notFound().build();
+        return exists? ResponseEntity.ok(repository.save(Item)): ResponseEntity.notFound().build();
     }
 
     @DeleteMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<String> deleteCharacter(@RequestBody Personagem Personagem) {
-        Boolean exists = repository.existsById(Personagem.getPersonagemId());
+    public ResponseEntity<String> deleteItem(@RequestBody Item Item) {
+        Boolean exists = repository.existsById(Item.getItemId());
 
         if (exists) {
-            repository.delete(Personagem);
-            return ResponseEntity.ok("Personagem removido");
+            repository.delete(Item);
+            return ResponseEntity.ok("Item removido");
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-}   
+}
