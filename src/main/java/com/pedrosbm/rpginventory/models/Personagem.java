@@ -17,25 +17,27 @@ public class Personagem {
 
     private String personagemNome;
 
-    // private String tipoAura;
+    private String tipoAura;
 
-    // private int vitalidade;
+    private int vitalidade;
 
-    // private int defesa;
+    private int defesa;
 
-    // private int eneru;
+    private int eneru;
 
-    // private int agilidade;
+    private int agilidade;
 
-    // private int intuicao;
+    private int intuicao;
 
-    // private int inteligencia;
+    private int inteligencia;
 
-    // private int forcaFisica;
+    private int forcaFisica;
 
-    // private int despertarNivel;
+    private int despertarNivel;
     
-    // private String intensidadeAura;
+    private String intensidadeAura;
+
+    private int pontos;
 
     @ManyToOne
     private Usuario usuario;
