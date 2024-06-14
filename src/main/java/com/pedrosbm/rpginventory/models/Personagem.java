@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
@@ -15,46 +16,49 @@ public class Personagem {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long personagemId;
-
+    
     private String personagemNome;
 
-    // atual
-    private int hp;
+    @Lob
+    private byte[] personagemImagem;
 
-    // atual
-    private int mp;
+    // /** atual */ 
+    // private int hp;
 
-    // 20
-    private int vitalidade;
+    // /** atual */ 
+    // private int mp;
 
-    // 0
-    private int defesa;
+    // /** 20 */
+    // private int vitalidade;
 
-    // 20
-    private int eneru;
+    // /** 0 */
+    // private int defesa;
 
-    // 20
-    private int agilidade;
+    // /** 20 */
+    // private int eneru;
 
-    // 10
-    private int intuicao;
+    // /** 20 */
+    // private int agilidade;
 
-    // 0
-    private int conhecimento;
+    // /** 10 */
+    // private int intuicao;
 
-    // 20
-    private int forcaFisica;
+    // /** 0 */
+    // private int conhecimento;
 
-    // 5
-    private int despertarNivel;
+    // /** 20 */
+    // private int forcaFisica;
+
+    // /** 5 */
+    // private int despertarNivel;
     
-    private String intensidadeAura;
+    // private String intensidadeAura;
 
-    private int pontos;
+    // private int pontos;
+
+    // @OneToOne
+    // private Aura aura;
 
     @ManyToOne
     private Usuario usuario;
-
-    @OneToOne
-    private Aura aura;
 }

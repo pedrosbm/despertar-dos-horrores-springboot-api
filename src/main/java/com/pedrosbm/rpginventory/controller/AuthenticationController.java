@@ -26,13 +26,8 @@ public class AuthenticationController {
         String nome = usuario.getUserNome();
         String senha = usuario.getUserPassword();
 
-        try {
-            Usuario user = repository.findByUserNomeAndUserPassword(nome, senha);
-            return ResponseEntity.ok(user);
-            
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+        Usuario user = repository.findByuserNomeAndUserPassword(nome, senha);
+        return user == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);            
     }
     
 }

@@ -3,12 +3,21 @@ package com.pedrosbm.rpginventory.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 public class Aura {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long auraId;
 
     private String auraPrincipal;
 
@@ -18,12 +27,10 @@ public class Aura {
 
     private String auraFinal;
 
-    private Skill skills;
-
     @JsonCreator
-    public Aura(@JsonProperty("aura") String aura){
-        setAuraPrincipal(aura);
-        switch (aura) {
+    public Aura(@JsonProperty("auraPrincipal") String auraPrincipal){
+        setAuraPrincipal(auraPrincipal);
+        switch (auraPrincipal) {
             case "elementos":
                 this.aurasSecundarias = new String[]{"telecinese", "emissao"};
                 this.aurasTerciarias = new String[]{"controle de vibracao", "controle de aura"};
@@ -65,5 +72,9 @@ public class Aura {
         this.aurasSecundarias = aurasSecundarias;
         this.aurasTerciarias = aurasSecundarias;
         this.auraFinal = auraFinal;
+    }
+
+    @JsonCreator
+    public Aura(){
     }
 }
