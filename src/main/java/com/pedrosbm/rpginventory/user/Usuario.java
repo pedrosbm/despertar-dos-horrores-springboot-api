@@ -1,4 +1,4 @@
-package com.pedrosbm.rpginventory.models;
+package com.pedrosbm.rpginventory.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,10 +11,10 @@ import lombok.Data;
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private String userNome;
+    private String nome;
 
-    private String userPassword;
+    private String password;
 }

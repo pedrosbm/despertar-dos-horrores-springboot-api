@@ -1,4 +1,6 @@
-package com.pedrosbm.rpginventory.models;
+package com.pedrosbm.rpginventory.item;
+
+import com.pedrosbm.rpginventory.personagem.Personagem;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,16 +14,16 @@ import lombok.Data;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long itemId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private String itemIcone;
+    private String icone;
 
-    private String itemNome;
+    private String nome;
 
-    private String itemTipo;
+    private String tipo;
 
-    private String itemDescricao;
+    private String descricao;
 
     @ManyToOne
     private Personagem personagem;

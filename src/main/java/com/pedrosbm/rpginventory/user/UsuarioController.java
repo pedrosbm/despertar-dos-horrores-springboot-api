@@ -1,4 +1,4 @@
-package com.pedrosbm.rpginventory.controller;
+package com.pedrosbm.rpginventory.user;
 
 import java.util.NoSuchElementException;
 
@@ -7,10 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.pedrosbm.rpginventory.models.Usuario;
-import com.pedrosbm.rpginventory.repository.UsuarioRepository;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +43,7 @@ public class UsuarioController {
     @PutMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity<Usuario> updateUser(@RequestBody Usuario usuario) {
-        Boolean exists = repository.existsById(usuario.getUserId());   
+        Boolean exists = repository.existsById(usuario.getId());   
 
         return exists? ResponseEntity.ok(repository.save(usuario)): ResponseEntity.notFound().build();
     }

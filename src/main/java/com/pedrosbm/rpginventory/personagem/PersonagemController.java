@@ -1,4 +1,4 @@
-package com.pedrosbm.rpginventory.controller;
+package com.pedrosbm.rpginventory.personagem;
 
 import java.util.NoSuchElementException;
 
@@ -9,10 +9,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.pedrosbm.rpginventory.models.Personagem;
-import com.pedrosbm.rpginventory.repository.PersonagemRepository;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,7 +54,7 @@ public class PersonagemController {
     @PutMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity<Personagem> updateCharacter(@RequestBody Personagem Personagem) {
-        Boolean exists = repository.existsById(Personagem.getPersonagemId());   
+        Boolean exists = repository.existsById(Personagem.getId());   
 
         return exists? ResponseEntity.ok(repository.save(Personagem)): ResponseEntity.notFound().build();
     }

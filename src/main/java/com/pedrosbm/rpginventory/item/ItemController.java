@@ -1,4 +1,4 @@
-package com.pedrosbm.rpginventory.controller;
+package com.pedrosbm.rpginventory.item;
 
 import java.util.NoSuchElementException;
 
@@ -18,11 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pedrosbm.rpginventory.models.Item;
-import com.pedrosbm.rpginventory.repository.ItemRepository;
-
 @RestController
-@RequestMapping("Item")
+@RequestMapping("/Item")
 public class ItemController {
     @Autowired
     private ItemRepository repository;
@@ -57,7 +54,7 @@ public class ItemController {
     @PutMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity<Item> updateItem(@RequestBody Item Item) {
-        Boolean exists = repository.existsById(Item.getItemId());   
+        Boolean exists = repository.existsById(Item.getId());   
 
         return exists? ResponseEntity.ok(repository.save(Item)): ResponseEntity.notFound().build();
     }

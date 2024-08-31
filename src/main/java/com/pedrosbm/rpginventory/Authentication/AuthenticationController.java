@@ -1,4 +1,4 @@
-package com.pedrosbm.rpginventory.controller;
+package com.pedrosbm.rpginventory.Authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,14 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pedrosbm.rpginventory.models.Usuario;
-import com.pedrosbm.rpginventory.repository.UsuarioRepository;
+import com.pedrosbm.rpginventory.user.Usuario;
+import com.pedrosbm.rpginventory.user.UsuarioRepository;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/Authenticate")
+@RequestMapping("/Auth")
 public class AuthenticationController {
     
     @Autowired
@@ -23,8 +24,8 @@ public class AuthenticationController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.ACCEPTED)
     public ResponseEntity<Usuario> authenticate(@RequestBody Usuario usuario) {
-        String nome = usuario.getUserNome();
-        String senha = usuario.getUserPassword();
+        String nome = usuario.getNome();
+        String senha = usuario.getPassword();
 
         Usuario user = repository.findByuserNomeAndUserPassword(nome, senha);
         return user == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);            
