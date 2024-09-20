@@ -19,9 +19,7 @@ public class Personagem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
     private String nome;
-
     
     private String auraPrincipal;
     
