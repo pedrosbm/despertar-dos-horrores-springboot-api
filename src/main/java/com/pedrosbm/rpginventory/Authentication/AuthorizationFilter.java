@@ -50,7 +50,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
             var auth = new UsernamePasswordAuthenticationToken(
                     user.getNome(),
                     user.getSenha(),
-                    List.of(new SimpleGrantedAuthority("USER"))
+                    List.of(new SimpleGrantedAuthority(user.getCargo()))
             );
             SecurityContextHolder.getContext().setAuthentication(auth);
             filterChain.doFilter(request, response);

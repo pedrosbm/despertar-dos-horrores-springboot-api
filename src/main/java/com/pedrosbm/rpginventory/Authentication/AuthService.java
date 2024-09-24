@@ -19,11 +19,12 @@ public class AuthService {
     }
 
     public Token login(Credentials credentials) {
-        var user = userRepository.findByNome(credentials.nome())
-                .orElseThrow(() -> new RuntimeException("Access Denied"));
+        System.out.println(credentials.toString());
+        var user = userRepository.findByNomeAndCargo(credentials.nome(), credentials.cargo())
+                .orElseThrow(() -> new RuntimeException("No user"));
 
         if (!passwordEncoder.matches(credentials.senha(), user.getSenha()))
-            throw new RuntimeException("Access Denied");
+            throw new RuntimeException("Wrong pass");
 
         return tokenService.create(credentials);
     }
