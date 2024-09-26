@@ -1,0 +1,2 @@
+UPDATE users set senha = '$2a$12$oqMgEkiKEjdMP.BqHtWKpOmbei8v5hDPSfgNXDGDuHAJv200rAg3m' where id = 1;
+UPDATE users set senha = '$2a$12$5fSwcC.kHJxKHOnP6TOTs.JOiK8VS/LAyaks9/9tqn6P/ZAvYxP1O' where id = 2;

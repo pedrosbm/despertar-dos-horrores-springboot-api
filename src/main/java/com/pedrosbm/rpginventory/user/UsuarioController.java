@@ -44,6 +44,7 @@ public class UsuarioController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity<Usuario> updateUser(@RequestBody Usuario usuario, @PathVariable Long id) {
         Boolean exists = repository.existsById(id);   
+        usuario.setId(id);
 
         return exists? ResponseEntity.ok(repository.save(usuario)): ResponseEntity.notFound().build();
     }

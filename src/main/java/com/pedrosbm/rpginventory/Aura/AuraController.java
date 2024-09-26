@@ -50,16 +50,17 @@ public class AuraController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    public ResponseEntity<Aura> newAura(@RequestBody Aura Aura) {
-        return ResponseEntity.ok(repository.save(Aura));
+    public ResponseEntity<Aura> newAura(@RequestBody Aura aura) {
+        return ResponseEntity.ok(repository.save(aura));
     }
     
     @PatchMapping("{id}")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ResponseEntity<Aura> updateAura(@RequestBody Aura Aura, @PathVariable Long id) {
+    public ResponseEntity<Aura> updateAura(@RequestBody Aura aura, @PathVariable Long id) {
         Boolean exists = repository.existsById(id);   
+        aura.setId(id);
 
-        return exists? ResponseEntity.ok(repository.save(Aura)): ResponseEntity.notFound().build();
+        return exists? ResponseEntity.ok(repository.save(aura)): ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")

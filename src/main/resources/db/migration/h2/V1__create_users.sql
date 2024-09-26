@@ -7,4 +7,4 @@ create table if not exists users(
 );
 
 insert into users(id, nome, senha, cargo) values(1, 'Pedro', 'Pedrosenha', 'PLAYER');
-insert into users(id, nome, senha, cargo) values(2, 'nellaf', 'nellafsenha', 'MESTRE');
+insert into users(id, nome, senha, cargo) values(2, 'nellaf', 'nellafsenha', 'MESTRE'); 

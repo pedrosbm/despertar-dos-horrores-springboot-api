@@ -47,16 +47,17 @@ public class ItemController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    public ResponseEntity<Item> newItem(@RequestBody Item Item) {
-        return ResponseEntity.ok(repository.save(Item));
+    public ResponseEntity<Item> newItem(@RequestBody Item item) {
+        return ResponseEntity.ok(repository.save(item));
     }
     
     @PatchMapping("{id}")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ResponseEntity<Item> updateItem(@RequestBody Item Item, @PathVariable Long id) {
+    public ResponseEntity<Item> updateItem(@RequestBody Item item, @PathVariable Long id) {
         Boolean exists = repository.existsById(id);   
+        item.setId(id);
 
-        return exists? ResponseEntity.ok(repository.save(Item)): ResponseEntity.notFound().build();
+        return exists? ResponseEntity.ok(repository.save(item)): ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
