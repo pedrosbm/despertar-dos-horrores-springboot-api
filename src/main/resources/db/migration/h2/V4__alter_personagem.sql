@@ -1,1 +1,0 @@
-alter table personagens add column pontos int

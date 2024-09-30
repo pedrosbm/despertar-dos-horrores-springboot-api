@@ -27,74 +27,42 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequestMapping("/personagem")
 public class PersonagemController {
     
-    private PersonagemRepository repository;
-    private UsuarioRepository repository2;
-
-    public PersonagemController(PersonagemRepository repository, UsuarioRepository repository2){
-        this.repository = repository;
-        this.repository2 = repository2;
-    }
+    @Autowired
+    private PersonagemService service;
      
-    @GetMapping("/User/{nome}")
+    @GetMapping("/User/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public ResponseEntity<Page<Personagem>> getCharactersByUser(@PathVariable String nome, @PageableDefault(size = 5) Pageable pageable) {
-        Page<Personagem> lista = repository.findByUsuarioNome(nome, pageable);
-        
-        return ResponseEntity.ok(lista);
+    public ResponseEntity<Page<Personagem>> getCharactersByUser(@PathVariable Long id, @PageableDefault(size = 5) Pageable pageable) {
+        return service.getCharactersByUser(id, pageable);
     }
     
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.FOUND)
     public ResponseEntity<Personagem> getCharacter(@PathVariable Long id) {
-        try {
-            Personagem personagem = repository.findById(id).get();
-            
-            return ResponseEntity.ok(personagem);
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return service.getCharacter(id);
     }
 
     @GetMapping
     @ResponseStatus(code = HttpStatus.FOUND)
     public ResponseEntity<Page<Personagem>> getAll(Pageable pageable) {
-        try {
-            Page<Personagem> personagens = repository.findAll(pageable);
-            
-            return ResponseEntity.ok(personagens);
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return service.getAll(pageable);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.ACCEPTED)
     public ResponseEntity<Personagem> newCharacter(@RequestBody Personagem personagem) {
-        Optional<Usuario> user = repository2.findByNome(personagem.getUsuario().getNome());
-
-        personagem.setUsuario(user.get());
-        return ResponseEntity.ok(repository.save(personagem));
+        return service.newCharacter(personagem);
     }
     
     @PatchMapping("{id}")
     @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity<Personagem> updateCharacter(@RequestBody Personagem personagem, @PathVariable Long id) {
-        Boolean exists = repository.existsById(id);   
-        personagem.setId(id);
-
-        return exists? ResponseEntity.ok(repository.save(personagem)): ResponseEntity.notFound().build();
+        return service.updateCharacter(personagem, id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<String> deleteCharacter(@PathVariable Long id) {
-        Boolean exists = repository.existsById(id);
-
-        if (exists) {
-            repository.deleteById(id);
-            return ResponseEntity.ok("Personagem removido");
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return service.deleteCharacter(id);
     }
 }   

@@ -51,7 +51,7 @@ public class ItemController {
         return ResponseEntity.ok(repository.save(item));
     }
     
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity<Item> updateItem(@RequestBody Item item, @PathVariable Long id) {
         Boolean exists = repository.existsById(id);   
