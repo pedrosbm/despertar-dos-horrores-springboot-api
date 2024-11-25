@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequestMapping("/personagem")
 public class PersonagemController {
     
+    // TODO implement character server side events for data fetching on the client
+
     @Autowired
     private PersonagemService service;
      
