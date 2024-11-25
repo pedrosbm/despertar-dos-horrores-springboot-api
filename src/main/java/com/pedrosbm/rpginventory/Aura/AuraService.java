@@ -1,4 +1,4 @@
-package com.pedrosbm.rpginventory.Aura;
+package com.pedrosbm.rpginventory.aura;
 
 import java.util.List;
 import java.util.NoSuchElementException;

@@ -1,4 +1,4 @@
-package com.pedrosbm.rpginventory.Aura;
+package com.pedrosbm.rpginventory.aura;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
